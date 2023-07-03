@@ -75,7 +75,43 @@ paths:
                   type: string
                 age:
                   type: integer
-              
 
 
+#Returnuje usera po ID
+  /users/{id}:
+    get:
+      summary: Zwraca usersa z ID
+      description: Powinno zwrócić usera z ID
+      parameters:
+        - name: id   
+          in: path
+          require: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Success
 
+#Post json/body
+  /create:
+    post:
+      summary: Post Dejta
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+      - in: body
+        name: user
+        schema:
+          type: object
+          properties:
+            id:
+              type: integer
+            name: 
+              type: string
+      responses:
+        200:
+          description: Succes
+  
+          
