@@ -1,0 +1,81 @@
+swagger: "2.0"
+info:
+  title: MyWeb Api
+  description: TO jest Api testowe
+  version: 1.0
+  contact:
+    email: slawek.zahun@gmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+schemes: [http, https]
+
+paths:
+#Returnuje mi tu stringa cyk cyk
+  /string:
+    get:
+      summary: Zwraca stringa
+      description: Powinno zwrócić stringa
+      responses:
+        200:
+          description: Success
+          schema:
+            type: string
+            example: Przykład stringa
+        400:
+          description: User Error
+          schema:
+            type: string
+            example: awaria interfejsu między klawiaturą a monitorem ^^
+        500:
+          description: Internal Server Error
+
+#Returnuje mi tu object cyk cyk 
+  /user:
+    get:
+      summary: Zwraca obiekt
+      description: Powinno zwrócić obiekt
+      responses:
+        200:
+          description: Success
+          schema:
+            type: object
+            properties: 
+              id:
+                type: integer
+              name:
+                type: string
+              age:
+                type: integer
+              
+        400:
+          description: User Error                   
+             awaria interfejsu między klawiaturą a monitorem ^^
+        500:
+          description: Internal Server Error
+
+
+#Returnuje wiele juserów :)
+  /users:
+    get:
+      summary: Zwraca wszystkich usersów
+      description: Powinno zwrócić wszystkich userów
+      responses:
+        200:
+          description: Success
+          schema:
+            type: array
+            items: 
+              type: object
+              properties: 
+                id:
+                  type: integer
+                name:
+                  type: string
+                age:
+                  type: integer
+              
+
+
+
