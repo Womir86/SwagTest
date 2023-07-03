@@ -8,7 +8,7 @@ const nodemon = require("nodemon");
 const port = process.env.port || 8080;
 const app = express();
 
-app.use(express.json);
+app.use(express.json()); //do POST jsony
 app.use(("/api"), swaggerUI.serve, swaggerUI.setup(swaggerJsDoc));
 
 
@@ -39,7 +39,7 @@ app.get("/users/:id", (req, res) => {
     const obj = users.find((x) => x.id === parseInt(req.params.id)); 
     res.status(200).send(obj)
 });
-app.get("/create", (req, res) => {
+app.post("/create", (req, res) => {
     users=[req.body,...users]
     res.send(users)
 });

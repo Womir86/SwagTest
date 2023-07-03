@@ -110,6 +110,8 @@ paths:
               type: integer
             name: 
               type: string
+            age:
+              type: integer
       responses:
         200:
           description: Succes
