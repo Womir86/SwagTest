@@ -135,7 +135,36 @@ paths:
         200:
           description: Succes
 
-#Schemes do $ref
+#Query
+  /userQuery:
+    get:
+      parameters:
+        - in: query
+          name: id
+          type: integer
+        - in: query
+          name: age
+          type: integer
+      responses:
+        200:
+          description: Success  
+
+#File upload
+  /upload:
+    post:
+      consumes:
+        - multipart/form-data
+      parameters:
+        - in: formData
+          name: file
+          type: file
+          required: true
+          description: File Uploud
+      responses:
+        200:
+          description: Success       
+
+#Schemes do $ref definition
 components:
   schemes:  
     user:
@@ -143,6 +172,7 @@ components:
       properties:
         id:
           type: integer
+          required: true
         name: 
           type: string
         age:
