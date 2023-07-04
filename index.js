@@ -64,4 +64,10 @@ app.post("/upload", (req, res) => {
 });
 
 
+app.delete("/deleteQuery", (req, res) => {
+    users=users.filter(u => u.id !== parseInt(req.query.id));    
+    res.status(200).send(users)
+});
+
+
 app.listen(port, () => console.log(`The server is running on http://localhost:${port}/api`));

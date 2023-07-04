@@ -162,7 +162,19 @@ paths:
           description: File Uploud
       responses:
         200:
-          description: Success       
+          description: Success   
+
+
+  /deleteQuery:
+    delete:
+      parameters:
+        - in: query
+          name: id
+          type: integer
+        
+      responses:
+        200:
+          description: Success      
 
 #Schemes do $ref definition
 components:
