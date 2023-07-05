@@ -1,9 +1,35 @@
+'use strict';
+const { PerformanceObserver, performance } = require('perf_hooks');
 const express= require("express");
 const swaggerUI = require("swagger-ui-express");
 const yamljs = require("yamljs");
 const swaggerJsDoc=yamljs.load("./api.yaml");
 const nodemon = require("nodemon");
 const fileUpload = require("express-fileupload");
+var util = require('util');
+var hana = require('@sap/hana-client');
+
+var connOptions = {
+
+    serverNode: '995f02a7-dd27-4f42-a691-4365ed7e8437.hana.trial-us10.hanacloud.ondemand.com:443',
+    UID: 'B3AC1289F06A4E55ACBD4D49B0691B65_7II3ZXD1WZ2ORSY77J7MC647F_RT',
+    PWD: 'Va4512zmUT8wAceSN7ETBS8jEU.x3OzTaPfI1rUYGYDPUvfMSyK3eSAjXPcQq5nAeqzI-l029RcGrZTs7t_aY8jdpsavS5D061nzQu7zEF6vlS-qH0cAnSGJd8hDTN.M',
+    sslValidateCertificate: 'false',
+};
+
+var connection = hana.createConnection();
+// connection.connect(connOptions);
+
+// var sql = 'SELECT top 1 * FROM "B3AC1289F06A4E55ACBD4D49B0691B65"."WOMIRCRUDVC_BOOK"';
+// // var sql = 'SET @json = (SSELECT "ID", "NAME" FROM "B3AC1289F06A4E55ACBD4D49B0691B65"."WOMIRCRUDVC_BOOK" FOR JSON PATH)';
+// //var t0 = performance.now();
+// var result = connection.exec(sql);
+
+// //console.log(util.inspect(result, { colors: false }));
+// //console.log(users)
+// //var t1 = performance.now();
+// //console.log("time in ms " +  (t1 - t0));
+// connection.disconnect();
 
 
 const port = process.env.port || 8080;
@@ -67,6 +93,15 @@ app.post("/upload", (req, res) => {
 app.delete("/deleteQuery", (req, res) => {
     users=users.filter(u => u.id !== parseInt(req.query.id));    
     res.status(200).send(users)
+});
+
+app.get("/booksHANA", (req, res) => {
+    connection.connect(connOptions);
+    var sql = 'SELECT  * FROM "B3AC1289F06A4E55ACBD4D49B0691B65"."WOMIRCRUDVC_BOOK"';
+    var result = connection.exec(sql);
+
+connection.disconnect();
+    res.send(result)
 });
 
 

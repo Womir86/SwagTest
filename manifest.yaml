@@ -1,5 +1,5 @@
 applications:
-  - name: WomirAppx
+  - name: WomirAppxzzz
     random-route: true
     path: 
     buidpack: https://github.com/cloudfoundry/nodejs-buidpack

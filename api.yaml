@@ -174,7 +174,26 @@ paths:
         
       responses:
         200:
-          description: Success      
+          description: Success     
+
+  /booksHANA:
+    get:
+      summary: Zwraca wszystkich usersów z bazy HANA
+      description: Powinno zwrócić wszystkich userów
+      responses:
+        200:
+          description: Success
+          schema:
+            type: array
+            items: 
+              type: object
+              properties: 
+                ID:
+                  type: integer
+                NAME:
+                  type: string
+                AUTHOR:
+                  type: string
 
 #Schemes do $ref definition
 components:
