@@ -1,7 +1,7 @@
 applications:
-  - name: WomirAppxzzz
+  - name: WomirAppHanaDB
     random-route: true
     path: 
     buidpack: https://github.com/cloudfoundry/nodejs-buidpack
     host: mynodeappdemo
-    memory: 128M
+    memory: 256M

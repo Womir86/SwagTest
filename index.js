@@ -6,30 +6,20 @@ const yamljs = require("yamljs");
 const swaggerJsDoc=yamljs.load("./api.yaml");
 const nodemon = require("nodemon");
 const fileUpload = require("express-fileupload");
+const dbConfig=require('./DATABASE/dbConf')
 var util = require('util');
 var hana = require('@sap/hana-client');
 
 var connOptions = {
 
-    serverNode: '995f02a7-dd27-4f42-a691-4365ed7e8437.hana.trial-us10.hanacloud.ondemand.com:443',
-    UID: 'B3AC1289F06A4E55ACBD4D49B0691B65_7II3ZXD1WZ2ORSY77J7MC647F_RT',
-    PWD: 'Va4512zmUT8wAceSN7ETBS8jEU.x3OzTaPfI1rUYGYDPUvfMSyK3eSAjXPcQq5nAeqzI-l029RcGrZTs7t_aY8jdpsavS5D061nzQu7zEF6vlS-qH0cAnSGJd8hDTN.M',
-    sslValidateCertificate: 'false',
+    serverNode: dbConfig.SERVERNODE,
+    UID: dbConfig.UID,
+    PWD: dbConfig.PWD,
+    sslValidateCertificate: dbConfig.SSLVALIDATE,
 };
 
 var connection = hana.createConnection();
-// connection.connect(connOptions);
 
-// var sql = 'SELECT top 1 * FROM "B3AC1289F06A4E55ACBD4D49B0691B65"."WOMIRCRUDVC_BOOK"';
-// // var sql = 'SET @json = (SSELECT "ID", "NAME" FROM "B3AC1289F06A4E55ACBD4D49B0691B65"."WOMIRCRUDVC_BOOK" FOR JSON PATH)';
-// //var t0 = performance.now();
-// var result = connection.exec(sql);
-
-// //console.log(util.inspect(result, { colors: false }));
-// //console.log(users)
-// //var t1 = performance.now();
-// //console.log("time in ms " +  (t1 - t0));
-// connection.disconnect();
 
 
 const port = process.env.port || 8080;
@@ -102,6 +92,39 @@ app.get("/booksHANA", (req, res) => {
 
 connection.disconnect();
     res.send(result)
+});
+
+
+app.post("/createBookHana", (req, res) => {
+       
+    console.log(req.body)
+    const obj=req.body;
+    console.log(obj);
+    connection.connect(connOptions);
+    var insertBook= `INSERT INTO "B3AC1289F06A4E55ACBD4D49B0691B65"."WOMIRCRUDVC_BOOK" VALUES(${req.body.ID},'${req.body.NAME}','${req.body.AUTHOR}')`;
+    console.log(insertBook);
+    connection.exec(insertBook);
+    
+    var sql = 'SELECT  * FROM "B3AC1289F06A4E55ACBD4D49B0691B65"."WOMIRCRUDVC_BOOK"';
+    var result = connection.exec(sql);
+    
+    connection.disconnect();
+    
+    res.send(result);
+});
+
+
+app.delete("/deleteBookHana", (req, res) => {
+
+    connection.connect(connOptions);
+        
+    var sql = `DELETE  FROM "B3AC1289F06A4E55ACBD4D49B0691B65"."WOMIRCRUDVC_BOOK" WHERE ID=${req.query.ID}`;
+    var result = connection.exec(sql);
+    
+    connection.disconnect();
+    
+    res.send(`Usunięto indeks: ${req.query.ID}`);
+    
 });
 
 

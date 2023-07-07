@@ -195,6 +195,41 @@ paths:
                 AUTHOR:
                   type: string
 
+  /createBookHana:
+    post:
+      summary: Post Dejta to HANA DiBi
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+      - in: body
+        name: book
+        schema:
+          type: object
+          properties:
+            ID:
+              type: integer
+            NAME: 
+              type: string
+            AUTHOR:
+              type: string
+      responses:
+        200:
+          description: Succes
+
+  /deleteBookHana:
+    delete:
+      parameters:
+        - in: query
+          name: ID
+          type: integer
+        
+      responses:
+        200:
+          description: Success   
+  
+
 #Schemes do $ref definition
 components:
   schemes:  
