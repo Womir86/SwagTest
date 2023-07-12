@@ -85,9 +85,9 @@ app.delete("/deleteQuery", (req, res) => {
     res.status(200).send(users)
 });
 
-app.get("/booksHANA", (req, res) => {
+app.get("/carsHANA", (req, res) => {
     connection.connect(connOptions);
-    var sql = 'SELECT  * FROM "B3AC1289F06A4E55ACBD4D49B0691B65"."WOMIRCRUDVC_BOOK"';
+    var sql = 'SELECT * FROM "803D1652C87A494BBEF8F75C987923C3"."PALETYZACJACAP_CARS"';
     var result = connection.exec(sql);
 
 connection.disconnect();
@@ -95,17 +95,17 @@ connection.disconnect();
 });
 
 
-app.post("/createBookHana", (req, res) => {
+app.post("/createCarHana", (req, res) => {
        
     console.log(req.body)
     const obj=req.body;
     console.log(obj);
     connection.connect(connOptions);
-    var insertBook= `INSERT INTO "B3AC1289F06A4E55ACBD4D49B0691B65"."WOMIRCRUDVC_BOOK" VALUES(${req.body.ID},'${req.body.NAME}','${req.body.AUTHOR}')`;
+    var insertBook= `INSERT INTO "803D1652C87A494BBEF8F75C987923C3"."PALETYZACJACAP_CARS" VALUES(${req.body.ID},'${req.body.NAME}','${req.body.COLOR}','${req.body.BRAND}')`;
     console.log(insertBook);
     connection.exec(insertBook);
     
-    var sql = 'SELECT  * FROM "B3AC1289F06A4E55ACBD4D49B0691B65"."WOMIRCRUDVC_BOOK"';
+    var sql = 'SELECT  * FROM "803D1652C87A494BBEF8F75C987923C3"."PALETYZACJACAP_CARS"';
     var result = connection.exec(sql);
     
     connection.disconnect();
@@ -114,11 +114,40 @@ app.post("/createBookHana", (req, res) => {
 });
 
 
-app.delete("/deleteBookHana", (req, res) => {
+// app.get("/booksHANA", (req, res) => {
+//     connection.connect(connOptions);
+//     var sql = 'SELECT  * FROM "B3AC1289F06A4E55ACBD4D49B0691B65"."WOMIRCRUDVC_BOOK"';
+//     var result = connection.exec(sql);
+
+// connection.disconnect();
+//     res.send(result)
+// });
+
+
+// app.post("/createBookHana", (req, res) => {
+       
+//     console.log(req.body)
+//     const obj=req.body;
+//     console.log(obj);
+//     connection.connect(connOptions);
+//     var insertBook= `INSERT INTO "B3AC1289F06A4E55ACBD4D49B0691B65"."WOMIRCRUDVC_BOOK" VALUES(${req.body.ID},'${req.body.NAME}','${req.body.AUTHOR}')`;
+//     console.log(insertBook);
+//     connection.exec(insertBook);
+    
+//     var sql = 'SELECT  * FROM "B3AC1289F06A4E55ACBD4D49B0691B65"."WOMIRCRUDVC_BOOK"';
+//     var result = connection.exec(sql);
+    
+//     connection.disconnect();
+    
+//     res.send(result);
+// });
+
+
+app.delete("/deleteCarHana", (req, res) => {
 
     connection.connect(connOptions);
         
-    var sql = `DELETE  FROM "B3AC1289F06A4E55ACBD4D49B0691B65"."WOMIRCRUDVC_BOOK" WHERE ID=${req.query.ID}`;
+    var sql = `DELETE  FROM "803D1652C87A494BBEF8F75C987923C3"."PALETYZACJACAP_CARS" WHERE ID=${req.query.ID}`;
     var result = connection.exec(sql);
     
     connection.disconnect();
@@ -126,6 +155,74 @@ app.delete("/deleteBookHana", (req, res) => {
     res.send(`Usunięto indeks: ${req.query.ID}`);
     
 });
+
+app.get("/usersHANA", (req, res) => {
+    connection.connect(connOptions);
+    var sql = 'SELECT * FROM "803D1652C87A494BBEF8F75C987923C3"."PALETYZACJACAP_PERSON"';
+    var result = connection.exec(sql);
+
+connection.disconnect();
+    res.send(result)
+});
+
+
+app.post("/createUserHana", (req, res) => {
+       
+    console.log(req.body)
+    const obj=req.body;
+    console.log(obj);
+    connection.connect(connOptions);
+    var insertBook= `INSERT INTO "803D1652C87A494BBEF8F75C987923C3"."PALETYZACJACAP_PERSON" VALUES(${req.body.ID},'${req.body.NAME}','${req.body.CAR}')`;
+    console.log(insertBook);
+    connection.exec(insertBook);
+    
+    var sql = 'SELECT  * FROM "803D1652C87A494BBEF8F75C987923C3"."PALETYZACJACAP_PERSON"';
+    var result = connection.exec(sql);
+    
+    connection.disconnect();
+    
+    res.send(result);
+});
+
+
+
+app.delete("/deleteUserHana", (req, res) => {
+
+    connection.connect(connOptions);
+        
+    var sql = `DELETE  FROM "803D1652C87A494BBEF8F75C987923C3"."PALETYZACJACAP_PERSON" WHERE ID=${req.query.ID}`;
+    var result = connection.exec(sql);
+    
+    connection.disconnect();
+    
+    res.send(`Usunięto indeks: ${req.query.ID}`);
+    
+});
+
+
+app.post("/createCarPersonHana", (req, res) => {
+       
+    console.log(req.body)
+    const obj=req.body;
+    console.log(obj);
+    connection.connect(connOptions);
+    var insertCar= `INSERT INTO "803D1652C87A494BBEF8F75C987923C3"."PALETYZACJACAP_CARS" VALUES(${req.body.Car.ID },'${req.body.Car.NAME}','${req.body.Car.COLOR}','${req.body.Car.BRAND}')`;
+    console.log(insertCar);
+    var insertPerson= `INSERT INTO "803D1652C87A494BBEF8F75C987923C3"."PALETYZACJACAP_PERSON" VALUES(${req.body.Person.ID},'${req.body.Person.NAME}',${req.body.Person.CAR})`;
+    console.log(insertPerson)
+    // PALETYZACJACAP_CARS
+    //console.log(insertBook);
+    connection.exec(insertCar);
+    connection.exec(insertPerson);
+    
+    var sql = 'SELECT  * FROM "803D1652C87A494BBEF8F75C987923C3"."PALETYZACJACAP_PERSON"';
+    var result = connection.exec(sql);
+    
+    connection.disconnect();
+    
+    res.send(result);
+});
+
 
 
 app.listen(port, () => console.log(`The server is running on http://localhost:${port}/api`));

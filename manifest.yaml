@@ -1,5 +1,5 @@
 applications:
-  - name: WomirAppHanaDB
+  - name: PaletyzacjaApi
     random-route: true
     path: 
     buidpack: https://github.com/cloudfoundry/nodejs-buidpack

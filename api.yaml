@@ -1,98 +1,135 @@
 swagger: "2.0"
 info:
-  title: MyWeb Api
+  title: DAP Api BTP
   description: TO jest Api testowe
   version: 1.0
   contact:
-    email: slawek.zahun@gmail.com
+    email: slawomir.kalinowski@animex.pl
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
 
-schemes: [http, https]
+tags:
+  - name: Cars
+    description: Wszystko o Samochodach
+    externalDocs:
+      description: Find out more
+      url: http://swagger.io
+  - name: Users
+    description: Dane o użytkownikach
+  - name: Multi
+    description: Insert multi Tables    
+    
+schemes: [https, http]
 
 paths:
-#Returnuje mi tu stringa cyk cyk
-  /string:
-    get:
-      summary: Zwraca stringa
-      description: Powinno zwrócić stringa
-      responses:
-        200:
-          description: Success
-          schema:
-            type: string
-            example: Przykład stringa
-        400:
-          description: User Error
-          schema:
-            type: string
-            example: awaria interfejsu między klawiaturą a monitorem ^^
-        500:
-          description: Internal Server Error
+# #Returnuje mi tu stringa cyk cyk
+#   /string:
+#     get:
+#       summary: Zwraca stringa
+#       description: Powinno zwrócić stringa
+#       responses:
+#         200:
+#           description: Success
+#           schema:
+#             type: string
+#             example: Przykład stringa
+#         400:
+#           description: User Error
+#           schema:
+#             type: string
+#             example: awaria interfejsu między klawiaturą a monitorem ^^
+#         500:
+#           description: Internal Server Error
 
-#Returnuje mi tu object cyk cyk 
-  /user:
-    get:
-      summary: Zwraca obiekt
-      description: Powinno zwrócić obiekt
-      responses:
-        200:
-          description: Success
-          schema:
-            type: object
-            properties: 
-              id:
-                type: integer
-              name:
-                type: string
-              age:
-                type: integer
+# #Returnuje mi tu object cyk cyk 
+#   /user:
+#     get:
+#       summary: Zwraca obiekt
+#       description: Powinno zwrócić obiekt
+#       responses:
+#         200:
+#           description: Success
+#           schema:
+#             type: object
+#             properties: 
+#               id:
+#                 type: integer
+#               name:
+#                 type: string
+#               age:
+#                 type: integer
               
-        400:
-          description: User Error                   
-             awaria interfejsu między klawiaturą a monitorem ^^
-        500:
-          description: Internal Server Error
+#         400:
+#           description: User Error                   
+#              awaria interfejsu między klawiaturą a monitorem ^^
+#         500:
+#           description: Internal Server Error
 
 
-#Returnuje wiele juserów :)
-  /users:
-    get:
-      summary: Zwraca wszystkich usersów
-      description: Powinno zwrócić wszystkich userów
-      responses:
-        200:
-          description: Success
-          schema:
-            type: array
-            items: 
-              type: object
-              properties: 
-                id:
-                  type: integer
-                name:
-                  type: string
-                age:
-                  type: integer
+# #Returnuje wiele juserów :)
+#   /users:
+#     get:
+#       summary: Zwraca wszystkich usersów
+#       description: Powinno zwrócić wszystkich userów
+#       responses:
+#         200:
+#           description: Success
+#           schema:
+#             type: array
+#             items: 
+#               type: object
+#               properties: 
+#                 id:
+#                   type: integer
+#                 name:
+#                   type: string
+#                 age:
+#                   type: integer
 
 
-#Returnuje usera po ID
-  /users/{id}:
-    get:
-      summary: Zwraca usersa z ID
-      description: Powinno zwrócić usera z ID
-      parameters:
-        - name: id   
-          in: path
-          require: true
-          schema:
-            type: integer
-      responses:
-        200:
-          description: Success
+# #Returnuje usera po ID
+#   /users/{id}:
+#     get:
+#       summary: Zwraca usersa z ID
+#       description: Powinno zwrócić usera z ID
+#       parameters:
+#         - name: id   
+#           in: path
+#           require: true
+#           schema:
+#             type: integer
+#       responses:
+#         200:
+#           description: Success
 
-# #Post json/body ver 1
+# # #Post json/body ver 1
+# #   /create:
+# #     post:
+# #       summary: Post Dejta
+# #       produces:
+# #         - application/json
+# #       consumes:
+# #         - application/json
+# #       parameters:
+# #       - in: body
+# #         name: user
+# #         schema:
+# #           type: object
+# #           properties:
+# #             id:
+# #               type: integer
+# #             name: 
+# #               type: string
+# #             age:
+# #               type: integer
+# #       responses:
+# #         200:
+# #           description: Succes
+  
+
+  
+# #Post json/body ver 2
 #   /create:
 #     post:
 #       summary: Post Dejta
@@ -104,82 +141,58 @@ paths:
 #       - in: body
 #         name: user
 #         schema:
-#           type: object
-#           properties:
-#             id:
-#               type: integer
-#             name: 
-#               type: string
-#             age:
-#               type: integer
+#           $ref: "#components/schemes/user"
 #       responses:
 #         200:
 #           description: Succes
-  
 
-  
-#Post json/body ver 2
-  /create:
-    post:
-      summary: Post Dejta
-      produces:
-        - application/json
-      consumes:
-        - application/json
-      parameters:
-      - in: body
-        name: user
-        schema:
-          $ref: "#components/schemes/user"
-      responses:
-        200:
-          description: Succes
+# #Query
+#   /userQuery:
+#     get:
+#       parameters:
+#         - in: query
+#           name: id
+#           type: integer
+#         - in: query
+#           name: age
+#           type: integer
+#       responses:
+#         200:
+#           description: Success  
 
-#Query
-  /userQuery:
-    get:
-      parameters:
-        - in: query
-          name: id
-          type: integer
-        - in: query
-          name: age
-          type: integer
-      responses:
-        200:
-          description: Success  
-
-#File upload
-  /upload:
-    post:
-      consumes:
-        - multipart/form-data
-      parameters:
-        - in: formData
-          name: file
-          type: file
-          required: true
-          description: File Uploud
-      responses:
-        200:
-          description: Success   
+# #File upload
+#   /upload:
+#     post:
+#       consumes:
+#         - multipart/form-data
+#       parameters:
+#         - in: formData
+#           name: file
+#           type: file
+#           required: true
+#           description: File Uploud
+#       responses:
+#         200:
+#           description: Success   
 
 
-  /deleteQuery:
-    delete:
-      parameters:
-        - in: query
-          name: id
-          type: integer
+#   /deleteQuery:
+#     delete:
+#       parameters:
+#         - in: query
+#           name: id
+#           type: integer
         
-      responses:
-        200:
-          description: Success     
+#       responses:
+#         200:
+#           description: Success     
 
-  /booksHANA:
+  /carsHANA:
     get:
-      summary: Zwraca wszystkich usersów z bazy HANA
-      description: Powinno zwrócić wszystkich userów
+      tags:
+        - Cars
+      summary: Zwraca wszystkie Cars z bazy HANA
+      description: Powinno zwrócić samochody 
       responses:
         200:
           description: Success
@@ -192,11 +205,15 @@ paths:
                   type: integer
                 NAME:
                   type: string
-                AUTHOR:
+                COLOR:
+                  type: string
+                BRAND:
                   type: string
 
-  /createBookHana:
+  /createCarHana:
     post:
+      tags:
+        - Cars
       summary: Post Dejta to HANA DiBi
       produces:
         - application/json
@@ -204,7 +221,7 @@ paths:
         - application/json
       parameters:
       - in: body
-        name: book
+        name: car
         schema:
           type: object
           properties:
@@ -212,14 +229,18 @@ paths:
               type: integer
             NAME: 
               type: string
-            AUTHOR:
+            COLOR:
+              type: string
+            BRAND:
               type: string
       responses:
         200:
           description: Succes
 
-  /deleteBookHana:
+  /deleteCarHana:
     delete:
+      tags:
+        - Cars
       parameters:
         - in: query
           name: ID
@@ -228,18 +249,120 @@ paths:
       responses:
         200:
           description: Success   
-  
 
-#Schemes do $ref definition
-components:
-  schemes:  
-    user:
-      type: object
-      properties:
-        id:
+
+  /usersHANA:
+    get:
+      tags:
+        - Users
+      summary: Zwraca wszystkich userów z bazy HANA
+      description: Powinno zwrócić userów 
+      responses:
+        200:
+          description: Success
+          schema:
+            type: array
+            items: 
+              type: object
+              properties: 
+                ID:
+                  type: integer
+                NAME:
+                  type: string
+                CAR:
+                  type: int
+
+
+  /createUserHana:
+    post:
+      tags:
+        - Users
+      summary: Post Dejta to HANA DiBi
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+      - in: body
+        name: car
+        schema:
+          type: object
+          properties:
+            ID:
+              type: integer
+            NAME: 
+              type: string
+            CAR:
+              type: integer
+      responses:
+        200:
+          description: Succes
+
+  /deleteUserHana:
+    delete:
+      tags:
+        - Users
+      parameters:
+        - in: query
+          name: ID
           type: integer
-          required: true
-        name: 
-          type: string
-        age:
-          type: integer
+        
+      responses:
+        200:
+          description: Success   
+
+
+  /createCarPersonHana:
+    post:
+      tags:
+        - Multi
+      summary: Post Multi Dejta to HANA DiBi
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+      - in: body
+        name: CarPerson
+        schema:
+          type: object
+          properties:
+            Car:
+              type: object
+              properties:
+                ID:
+                  type: integer
+                NAME: 
+                  type: string
+                COLOR:
+                  type: string
+                BRAND:
+                  type: string
+            Person:
+              type: object
+              properties:
+                ID:
+                  type: integer
+                NAME: 
+                  type: string
+                CAR:
+                  type: integer                         
+      responses:
+        200:
+          description: Succes
+
+
+
+# #Schemes do $ref definition
+# components:
+#   schemes:  
+#     user:
+#       type: object
+#       properties:
+#         id:
+#           type: integer
+#           required: true
+#         name: 
+#           type: string
+#         age:
+#           type: integer
